@@ -33,14 +33,6 @@
       "createdAt": "2023-12-02T13:26:57.560Z"
     },
     {
-      "id": 5,
-      "description": "Fernanda Lima",
-      "type": "income",
-      "category": "Com bebida",
-      "price": 25,
-      "createdAt": "2023-12-02T13:30:57.560Z"
-    },
-    {
       "id": 6,
       "description": "Guilherme Pereira",
       "type": "income",
@@ -50,43 +42,57 @@
     },
     {
       "description": "Willians Ferreira",
-      "price": 45,
+      "price": 120,
       "category": "Com bebida",
       "type": "income",
-      "createdAt": "2023-12-02T12:06:30.826Z",
+      "createdAt": "2023-12-03T12:19:40.410Z",
       "id": 7
+    },
+    {
+      "description": "Organinizador da Silva",
+      "price": 300,
+      "category": "Sem bebida",
+      "type": "outcome",
+      "createdAt": "2023-12-03T12:21:23.348Z",
+      "id": 8
     }
   ],
   "churras": [
     {
       "id": 1,
-      "date": "2023-12-23T19:36:44.505Z",
+      "date": "2023-12-23",
       "description": "Churras de Natal",
-      "participants": 15,
-      "price": 50,
       "createdAt": "2023-12-01T19:36:44.505Z"
     },
     {
       "id": 2,
-      "date": "2023-12-28T19:36:44.505Z",
+      "date": "2023-12-28",
       "description": "Churras de Fim de Ano",
-      "participants": 15,
-      "price": 50,
       "createdAt": "2023-12-01T19:36:44.505Z"
     },
     {
       "description": "Churras do Will",
-      "price": 500,
-      "date": "2023-12-31T12:06:30.826Z",
+      "date": "2023-12-31",
       "createdAt": "2023-12-02T16:42:13.553Z",
       "id": 3
     },
     {
       "description": "Churras Data",
-      "price": 200,
       "date": "2023-12-31",
       "createdAt": "2023-12-02T16:48:26.255Z",
       "id": 4
+    },
+    {
+      "description": "Festa Completa",
+      "date": "2023-12-29",
+      "createdAt": "2023-12-02T18:53:08.027Z",
+      "id": 5
+    },
+    {
+      "description": "Festa da Trinca",
+      "date": "2023-12-25",
+      "createdAt": "2023-12-03T12:16:27.245Z",
+      "id": 6
     }
   ]
 }

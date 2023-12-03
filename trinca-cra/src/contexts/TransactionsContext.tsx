@@ -20,6 +20,7 @@ interface CreateTransactionInput {
 
 interface TransactionContextType {
   transactions: Transaction[]
+  handleDeleteTransaction: (transactionId: number) => Promise<void>
   fetchTransactions: (query?: string) => Promise<void>
   createTransaction: (data: CreateTransactionInput) => Promise<void>
 }
@@ -62,6 +63,13 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     [],
   )
 
+  const handleDeleteTransaction = useCallback(async (transactionId: number) => {
+      await api.delete(`transactions/${transactionId}`)
+      fetchTransactions()
+    },
+    [fetchTransactions],
+  )
+
   useEffect(() => {
     fetchTransactions()
   }, [fetchTransactions])
@@ -72,6 +80,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
         transactions,
         fetchTransactions,
         createTransaction,
+        handleDeleteTransaction,
       }}
     >
       {children}

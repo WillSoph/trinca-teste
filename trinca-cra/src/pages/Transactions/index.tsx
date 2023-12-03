@@ -7,6 +7,7 @@ import { TransactionsContext } from '../../contexts/TransactionsContext'
 import { ChurrasContext } from '../../contexts/ChurrasContext'
 import { dateFormatter, priceFormatter } from '../../utils/formatter'
 import { SearchForm } from './components/SearchForm'
+import { Trash } from 'phosphor-react'
 // import logoImg from '../../assets/trinca_churras_logo.png'
 import styled from 'styled-components'
 
@@ -16,6 +17,7 @@ import {
   TransactionsTable,
 } from './styles'
 import { useState } from 'react'
+import { useSummary } from '../../hooks/useSummary'
 
 const ChurrasCardContainer = styled.div`
   width: 100%;
@@ -30,6 +32,7 @@ const ChurrasCardContainer = styled.div`
 export function Transactions() {
   const [showCards, setShowCards] = useState(true)
   const [showTable, setShowTable] = useState(false)
+  const summary = useSummary()
   function handleShowTable() {
     console.log('pegou')
     setShowTable(!showTable)
@@ -38,6 +41,12 @@ export function Transactions() {
   const transactions = useContextSelector(TransactionsContext, (context) => {
     return context.transactions
   })
+  const handleDeleteTransaction = useContextSelector(
+    TransactionsContext,
+    (context) => {
+      return context.handleDeleteTransaction
+    },
+  )
   const churrasData = useContextSelector(ChurrasContext, (context) => {
     return context.churrasList
   })
@@ -48,16 +57,21 @@ export function Transactions() {
 
       {showCards && (
         <ChurrasCardContainer>
-          {churrasData.map((churras) => (
-            <ChurrasCard
-              key={churras.id}
-              date={dateFormatter.format(new Date(churras.date))}
-              description={churras.description}
-              participants={churras.participants}
-              price={churras.price}
-              onClick={handleShowTable}
-            />
-          ))}
+          {churrasData.map((churras) => {
+            const originalDate = new Date(churras.date)
+            // eslint-disable-next-line prettier/prettier
+            const newDate = new Date(originalDate.setDate(originalDate.getDate() + 1))            
+            return (
+              <ChurrasCard
+                key={churras.id}
+                date={newDate.toLocaleDateString('pt-BR')}
+                description={churras.description}
+                participants={transactions.length}
+                price={summary.total}
+                onClick={handleShowTable}
+              />
+            )
+          })}
           <AddChurrasCard
             key="add-churras"
             date="Adicionar"
@@ -88,6 +102,16 @@ export function Transactions() {
                       <td>{transaction.category}</td>
                       <td>
                         {dateFormatter.format(new Date(transaction.createdAt))}
+                      </td>
+                      <td>
+                        <Trash
+                          name="trash"
+                          size={24}
+                          color="#F75A68"
+                          onClick={() =>
+                            handleDeleteTransaction(transaction.id)
+                          }
+                        />
                       </td>
                     </tr>
                   )

@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Dialog from '@radix-ui/react-dialog'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { X } from 'phosphor-react'
 import { useContextSelector } from 'use-context-selector'
 import * as z from 'zod'
@@ -10,7 +10,6 @@ import { CloseButton, Content, Overlay } from './styles'
 
 const newChurrasFormSchema = z.object({
   description: z.string(),
-  price: z.number(),
   date: z.string(),
 })
 
@@ -31,11 +30,10 @@ export function NewChurrasModal() {
   })
 
   async function handleCreateNewChurras(data: NewChurrasFormInputs) {
-    const { description, price, date } = data
+    const { description, date } = data
 
     await createChurras({
       description,
-      price,
       date,
     })
 
@@ -59,12 +57,6 @@ export function NewChurrasModal() {
             placeholder="Nome"
             required
             {...register('description')}
-          />
-          <input
-            type="number"
-            placeholder="Valor"
-            required
-            {...register('price', { valueAsNumber: true })}
           />
           <input
             type="date"

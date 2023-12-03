@@ -38,6 +38,9 @@ export const Content = styled(Dialog.Content)`
       &::placeholder {
         color: ${(props) => props.theme['gray-500']};
       }
+      &::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+      }
     }
 
     button[type='submit'] {

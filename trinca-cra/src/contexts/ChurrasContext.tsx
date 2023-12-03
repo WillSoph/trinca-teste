@@ -6,15 +6,12 @@ import { api } from '../lib/axios'
 interface Churras {
   id: number
   description: string
-  participants: number
-  price: number
   date: string
   createdAt: string
 }
 
 interface CreateChurrasInput {
   description: string
-  price: number
   date: string
 }
 
@@ -46,11 +43,10 @@ export function ChurrasProvider({ children }: ChurrasProviderProps) {
   }, [])
 
   const createChurras = useCallback(async (data: CreateChurrasInput) => {
-    const { description, price, date } = data
+    const { description, date } = data
 
     const response = await api.post('churras', {
       description,
-      price,
       date,
       createdAt: new Date(),
     })
